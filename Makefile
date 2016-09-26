@@ -45,8 +45,8 @@ SERIAL_DEVICE	?= /dev/ttyUSB0
 # Working directories
 ROOT		 = $(dir $(lastword $(MAKEFILE_LIST)))
 SRC_DIR		 = $(ROOT)
-CMSIS_DIR	 = $(DRIVERS_DIR)/lib/CMSIS
-STDPERIPH_DIR	 = $(DRIVERS_DIR)/lib/STM32F30x_StdPeriph_Driver
+CMSIS_DIR	 = lib/CMSIS/CM1
+STDPERIPH_DIR	 = lib/STM32F30x_StdPeriph_Driver
 OBJECT_DIR	 = $(ROOT)/build
 BIN_DIR		 = $(ROOT)/build
 
@@ -75,9 +75,9 @@ rosflight2_SRC =\
 VPATH		:= $(SRC_DIR):$(SRC_DIR)/startups
 
 # Search path and source files for the CMSIS sources
-VPATH		:= $(VPATH):$(CMSIS_DIR)/CM1/CoreSupport:$(CMSIS_DIR)/CM1/DeviceSupport/ST/STM32F30x
-CMSIS_SRC	 = $(notdir $(wildcard $(CMSIS_DIR)/CM1/CoreSupport/*.c \
-			               $(CMSIS_DIR)/CM1/DeviceSupport/ST/STM32F30x/*.c))
+VPATH		:= $(VPATH):$(CMSIS_DIR)/CoreSupport:$(CMSIS_DIR)/DeviceSupport/ST/STM32F30x
+CMSIS_SRC	 = $(notdir $(wildcard $(CMSIS_DIR)/CoreSupport/*.c \
+			               $(CMSIS_DIR)/DeviceSupport/ST/STM32F30x/*.c))
 
 # Search path and source files for the ST stdperiph library
 VPATH		:= $(VPATH):$(STDPERIPH_DIR)/src
