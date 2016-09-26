@@ -46,11 +46,12 @@ SERIAL_DEVICE	?= /dev/ttyUSB0
 ROOT		 = $(dir $(lastword $(MAKEFILE_LIST)))
 SRC_DIR		 = $(ROOT)
 CMSIS_DIR	 = $(BREEZY_DIR)/lib/CMSIS
-STDPERIPH_DIR	 = $(BREEZY_DIR)/lib/STM32F10x_StdPeriph_Driver
+STDPERIPH_DIR	 = $(BREEZY_DIR)/lib/STM32F30x_StdPeriph_Driver
 OBJECT_DIR	 = $(ROOT)/build
 BIN_DIR		 = $(ROOT)/build
 
-rosflight2_SRC =$(BREEZY_DIR)/drv_gpio.c \
+rosflight2_SRC =\
+		   $(BREEZY_DIR)/gpio_stm32f30x.c \
 		   $(BREEZY_DIR)/drv_i2c.c \
 		   $(BREEZY_DIR)/drv_adc.c \
 		   $(BREEZY_DIR)/drv_spi.c \
@@ -64,7 +65,7 @@ rosflight2_SRC =$(BREEZY_DIR)/drv_gpio.c \
 		   $(BREEZY_DIR)/drv_mb1242.c \
 		   $(BREEZY_DIR)/drv_ms5611.c \
 		   $(BREEZY_DIR)/printf.c \
-		   $(BREEZY_DIR)/startup_stm32f10x_md_gcc.S \
+		   $(BREEZY_DIR)/startup_stm32f30x_md_gcc.S \
 		   $(TURBOTRIG_DIR)/turbotrig.c \
 		   $(TURBOTRIG_DIR)/turbovec.c \
 		   $(PROJECT_SRC) \
@@ -74,9 +75,9 @@ rosflight2_SRC =$(BREEZY_DIR)/drv_gpio.c \
 VPATH		:= $(SRC_DIR):$(SRC_DIR)/startups
 
 # Search path and source files for the CMSIS sources
-VPATH		:= $(VPATH):$(CMSIS_DIR)/CM3/CoreSupport:$(CMSIS_DIR)/CM3/DeviceSupport/ST/STM32F10x
-CMSIS_SRC	 = $(notdir $(wildcard $(CMSIS_DIR)/CM3/CoreSupport/*.c \
-			               $(CMSIS_DIR)/CM3/DeviceSupport/ST/STM32F10x/*.c))
+VPATH		:= $(VPATH):$(CMSIS_DIR)/CM1/CoreSupport:$(CMSIS_DIR)/CM1/DeviceSupport/ST/STM32F30x
+CMSIS_SRC	 = $(notdir $(wildcard $(CMSIS_DIR)/CM1/CoreSupport/*.c \
+			               $(CMSIS_DIR)/CM1/DeviceSupport/ST/STM32F30x/*.c))
 
 # Search path and source files for the ST stdperiph library
 VPATH		:= $(VPATH):$(STDPERIPH_DIR)/src
@@ -97,8 +98,8 @@ INCLUDE_DIRS	 = include \
 		   lib \
 		   $(BREEZY_DIR) \
 		   $(STDPERIPH_DIR)/inc \
-		   $(CMSIS_DIR)/CM3/CoreSupport \
-		   $(CMSIS_DIR)/CM3/DeviceSupport/ST/STM32F10x \
+		   $(CMSIS_DIR)/CM1/CoreSupport \
+		   $(CMSIS_DIR)/CM1/DeviceSupport/ST/STM32F30x \
 
 ARCH_FLAGS	 = -mthumb -mcpu=cortex-m3
 

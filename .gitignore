@@ -21,3 +21,7 @@
 *.synctex.gz
 *.bbl
 *.blg
+
+.cproject
+.project
+.settings
