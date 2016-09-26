@@ -7,7 +7,7 @@
 ###############################################################################
 
 # external libraries
-BREEZY_DIR = lib/breezystm32
+DRIVERS_DIR = lib/drivers
 TURBOTRIG_DIR = lib/turbotrig
 
 # project source files
@@ -45,27 +45,27 @@ SERIAL_DEVICE	?= /dev/ttyUSB0
 # Working directories
 ROOT		 = $(dir $(lastword $(MAKEFILE_LIST)))
 SRC_DIR		 = $(ROOT)
-CMSIS_DIR	 = $(BREEZY_DIR)/lib/CMSIS
-STDPERIPH_DIR	 = $(BREEZY_DIR)/lib/STM32F30x_StdPeriph_Driver
+CMSIS_DIR	 = $(DRIVERS_DIR)/lib/CMSIS
+STDPERIPH_DIR	 = $(DRIVERS_DIR)/lib/STM32F30x_StdPeriph_Driver
 OBJECT_DIR	 = $(ROOT)/build
 BIN_DIR		 = $(ROOT)/build
 
 rosflight2_SRC =\
-		   $(BREEZY_DIR)/gpio_stm32f30x.c \
-		   $(BREEZY_DIR)/drv_i2c.c \
-		   $(BREEZY_DIR)/drv_adc.c \
-		   $(BREEZY_DIR)/drv_spi.c \
-		   $(BREEZY_DIR)/drv_pwm.c \
-		   $(BREEZY_DIR)/drv_system.c \
-		   $(BREEZY_DIR)/drv_serial.c \
-		   $(BREEZY_DIR)/drv_uart.c \
-		   $(BREEZY_DIR)/drv_timer.c \
-		   $(BREEZY_DIR)/drv_mpu6050.c \
-		   $(BREEZY_DIR)/drv_ms4525.c \
-		   $(BREEZY_DIR)/drv_mb1242.c \
-		   $(BREEZY_DIR)/drv_ms5611.c \
-		   $(BREEZY_DIR)/printf.c \
-		   $(BREEZY_DIR)/startup_stm32f30x_md_gcc.S \
+		   $(DRIVERS_DIR)/gpio_stm32f30x.c \
+		   $(DRIVERS_DIR)/drv_i2c.c \
+		   $(DRIVERS_DIR)/drv_adc.c \
+		   $(DRIVERS_DIR)/drv_spi.c \
+		   $(DRIVERS_DIR)/drv_pwm.c \
+		   $(DRIVERS_DIR)/drv_system.c \
+		   $(DRIVERS_DIR)/drv_serial.c \
+		   $(DRIVERS_DIR)/drv_uart.c \
+		   $(DRIVERS_DIR)/drv_timer.c \
+		   $(DRIVERS_DIR)/drv_mpu6050.c \
+		   $(DRIVERS_DIR)/drv_ms4525.c \
+		   $(DRIVERS_DIR)/drv_mb1242.c \
+		   $(DRIVERS_DIR)/drv_ms5611.c \
+		   $(DRIVERS_DIR)/printf.c \
+		   $(DRIVERS_DIR)/startup_stm32f30x_md_gcc.S \
 		   $(TURBOTRIG_DIR)/turbotrig.c \
 		   $(TURBOTRIG_DIR)/turbovec.c \
 		   $(PROJECT_SRC) \
@@ -96,7 +96,7 @@ OBJCOPY	 = arm-none-eabi-objcopy
 #
 INCLUDE_DIRS	 = include \
 		   lib \
-		   $(BREEZY_DIR) \
+		   $(DRIVERS_DIR) \
 		   $(STDPERIPH_DIR)/inc \
 		   $(CMSIS_DIR)/CM1/CoreSupport \
 		   $(CMSIS_DIR)/CM1/DeviceSupport/ST/STM32F30x \
@@ -129,7 +129,7 @@ ASFLAGS		 = $(ARCH_FLAGS) \
 		   -x assembler-with-cpp \
 		   $(addprefix -I,$(INCLUDE_DIRS))
 
-LD_SCRIPT	 = $(BREEZY_DIR)/stm32_flash.ld
+LD_SCRIPT	 = $(DRIVERS_DIR)/stm32_flash.ld
 LDFLAGS		 = -lm \
 		   -nostartfiles \
 		   --specs=nano.specs \
